@@ -1,0 +1,63 @@
+.btn {
+  /*link / visited is a state that the btn can have*/
+  &:link, &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .2s;
+    /*this is the parent of the after element so it's position relative*/
+    position: relative;
+  }
+  &:hover {
+    transform: translateY(-0.3rem);
+    /*x, y, blur, rgba*/
+    box-shadow: 0 1rem 2rem rgba($color-black,.2);
+  
+  /*this after pseudo element happens only on hover*/
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(-.1rem);
+    box-shadow: 0 .5rem 1rem rgba($color-black,.2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+  
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &--animated {
+    animation: moveInBottom .5s ease-out .75s;
+    /*automatically applies the animation styles at 0%
+    This makes the button hidden before the animation happens*/
+    animation-fill-mode: backwards;
+  }
+  
+    /* after is a span that appears immediately after in the markup*/
+    &::after {
+      /*need content otherwise it won't appear*/
+      content: '';
+      display: inline-block;
+      /*h and w are 100% of the parent element (the btn)*/
+      height: 100%;
+      width: 100%;
+      border-radius: 10rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      /*this will guarantee that it's behind the parent*/
+      z-index: -1;
+      /*put this on the parent to apply it to all children*/
+      transition: all .4s;
+    }
+}
