@@ -4,3 +4,24 @@
   // 95vh - 75vh in the header file = 20vh
   margin-top: -20vh;
 }
+
+.section-features {
+  padding: 20rem 0;
+  background-image: linear-gradient(
+    to right bottom, 
+  rgba($color-primary-light, 0.8), 
+  rgba($color-primary-dark, 0.8)), 
+  url(../img/nat-4.jpg);
+  background-size: cover;
+  transform: skewY(-7deg);
+  //moving the section up to cover the white gap. 
+  margin-top: -11rem;
+
+  // > is the direct child selector, and * is the universal (so select all direct children. Just the ones of the parent, not their children too)
+    // try it without the > thing and you'll see why direct children is a thing
+  //this straigthens the feature boxes while the rest of the section is skewed
+  & > * {
+    transform: skewY(7deg);
+  }
+}
+ 
