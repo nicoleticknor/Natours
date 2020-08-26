@@ -1,0 +1,183 @@
+.card {
+
+  //FUNCTIONALITY
+  position: relative;
+
+  // this will make it look like it's coming out at you
+  //the lower the value, the more dramatic the effect
+  perspective: 150rem;
+  //might not need this anymore?
+  -moz-perspective: 150rem;
+
+  //need to give the parent the same height as the card, because absolute positioning takes the card out of the normal CSS flow
+  //this causes us to lose some the effect of perspective
+  //this is similar to what happens with float, with the clearfix solution
+  height: 52rem;
+
+  &__side {
+    font-size: 2rem;
+    height: 52rem;
+    border-radius: 3px;
+    // the image will overflow the parent and the border radius won't show up. so we need to set the overflow to hidden
+    overflow: hidden;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+
+    //not sure what effect ease does here. it looks the same to me
+    transition: all .8s ease;
+
+    //absolute positioning them so they're on top of each other instead of one after another
+    position: absolute;
+    top: 0;
+    left: 0;
+    //need to give them a width so they don't just occupy the width of the text
+    width: 100%;
+    //hide the back side of the card
+    backface-visibility: hidden;
+
+    &--front {
+      background-color: $color-white;
+    }
+
+    &--back {
+      //we have to hide the back
+      //if you want to use the dev tools on the back of the card, just remove this so that the back shows up
+      transform: rotateY(180deg);
+
+      &-1 {
+        background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+      }
+      &-2 {
+        background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+      }
+      &-3 {
+        background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark);
+      }
+    }
+  }
+
+  //only the front side needs to be transformed 180
+  //needs to be -180 or else it moves in the wrong direction relative to the back moving from 180 to 0
+  //slow the transition down to see what I mean
+  &:hover &__side--front {
+    transform: rotateY(-180deg);
+  }
+
+  //the back goes to zero
+  &:hover &__side--back {
+    transform: rotateY(0);
+  }
+
+  // FRONT SIDE STYLING 
+  &__picture {
+    background-size: cover;
+    //needs a height, because the element just has a space in it (because the image is in the background-image property, not in the markup
+    height: 23rem;
+    //this will take two backgrounds and blend them together. check out the dev tools to see what the different options look like
+    background-blend-mode: screen;
+    //need the webkit thing in 2017. not sure about now
+    -webkit-background-clip: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    //clip-path breaks our border radius as well so we need to manually add them to the top corners
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+
+    &--1 {
+      // note that its only one level because ultimately this is compiled to the style.css file which is in the css/ folder
+      // add the two background images and separatae with a comma. they are blended according to the parent element
+      background-image: url(../img/nat-5.jpg), linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+    }
+
+    &--2 {
+      background-image: url(../img/nat-6.jpg), linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+    }
+
+    &--3 {
+      background-image: url(../img/nat-7.jpg), linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark);
+    }
+  }
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-align: right;
+    text-transform: uppercase;
+    color: $color-white;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width: 75%;
+  }
+
+  //we needed to make this span so that we could use the box-decoration-break property on it
+  &__heading-span {
+    //added padding here and width of 75% on the parent to create a line break
+    padding: 1rem 1.5rem;
+    //this box-decoration-break property will allow the above padding to be applied in the middle of the line of text, that is after the SEA and before the EXPLORER words. Without this, there's no padding after/before those words
+    //need the webkit prefixing it
+    //the "clone" option treats both sections of the line break as two different entities, so the padding gets applied to both
+    //each entity is a "box"
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    &--1 {
+      background-image: linear-gradient(to right bottom, rgba($color-secondary-light, .85), rgba($color-secondary-dark, .85));
+    }
+    &--2 {
+      background-image: linear-gradient(to right bottom, rgba($color-primary-light, .85), rgba($color-primary-dark, .85));
+    }
+    &--3 {
+      background-image: linear-gradient(to right bottom, rgba($color-tertiary-light, .85), rgba($color-tertiary-dark, .85));
+    }
+  }
+
+  &__details {
+    padding: 3rem;
+
+    ul {
+      //standard property to use for unordered lists
+      list-style: none;
+      //this is so that the line underneath doesn't go across the whole card
+      width: 80%;
+      margin: 0 auto;
+
+      li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $color-grey-light-2;
+        }
+      }
+    }
+  }
+
+  //FRONT SIDE STYLING
+  &__cta {
+    //to dead center the elements
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    //the CTA box has no width, so it's just the max width it has to be. 
+    //we need it to be bigger so the button text doesn't have a line break in it
+    width: 90%;
+    text-align: center;
+  }
+
+  &__price-box {
+    text-align: center;
+    margin-bottom: 8rem;
+    color: $color-white;
+  }
+
+  &__price-only {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+
+  &__price-value {
+    font-size: 6rem;
+    font-weight: 100;
+  }
+}
+ 

@@ -12,6 +12,8 @@
   it will crop from the bottom. 
   There's also bottom and center*/
   background-position: top;
+  //need the webkit thing in 2017. not sure about now
+  -webkit-background-clip: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 
   &__logo-box {
