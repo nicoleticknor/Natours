@@ -1,0 +1,186 @@
+.navigation {
+
+  &__checkbox {
+    //hide the checkbox for the hack
+    display: none;
+  }
+
+  &__button {
+    background-color: $color-white;
+    //making this larger than the background so that it totally hides the background when it's a small circle
+    //it's 5px bigger, so it's also 5px higher up and to the left
+    height: 7rem;
+    width: 7rem;
+    position: fixed;
+    //5px higher and left than the background
+    top: 6rem;
+    right: 6rem;
+    border-radius: 50%;
+    z-index: 2000;
+    box-shadow: 0 1rem 3rem rgba($color-black, .1);
+
+    //to center the three lines in the button
+    text-align: center;
+
+    cursor: pointer;
+  }
+
+  &__background {
+    //starts out behind the nav button and then expands
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    //this takes the element out of the flow, and allows us to position it with top/right/etc like position: absolute, but also fixes it there so it stays while scrolling. 
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    background-image: radial-gradient(circle at center, $color-primary-light 0, $color-primary-dark 100%);
+    //z-index only works on elements which have their position defined (this one does). this is so it doesn't get hidden by the landing graphic
+    z-index: 1000;
+    //adding this here for development purposes. Will move it later
+    // transform: scale(80);
+
+    //easings.net and cubic-bezier.com are resources to select or generate the timing function values you want
+    transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  &__nav {
+    //when open, the nav should cover the entire viewport, and be fixed there while scrolling
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    // !! why is this not centering properly?
+    left: 22.5%;
+    //so that the white circle is on the top, but this is on top of the rest of the content
+    z-index: 1500;
+    //this won't de-activate the links, so we need to also set the width to 0 
+    opacity: 0;
+    width: 0;
+    transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  &__list {
+    //refactor this into a mixin and then put it wherever we use it
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+    //this is because it grows in the animation and we don't want that
+    width: 100%;
+  }
+
+  &__item {
+    margin: 1rem;
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      //need to do this so that the padding and the transform work properly. otherwise it's just text and doesn't expand enough
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 300;
+      //little bit more padding on the sides looks good
+      padding: 1rem 2rem;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
+      //if you set this to 200%, only the first half of the gradient will show up. play in dev tools to understand. This is how our animation will work
+      //needs to be higher because of the 120deg gradient
+      background-size: 225%;
+      transition: all .4s;
+
+      span {
+        margin-right: 1.5rem;
+        display: inline-block;
+      }
+    }
+ 
+    &:hover,
+    &:active {
+      background-position: 100%; 
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+
+  }
+
+  //FUNCTIONALITY
+
+  //for clicking the menu button
+  &__checkbox:checked ~ &__background {
+  transform: scale(80);
+
+  }
+
+  &__checkbox:checked ~ &__nav {
+    opacity: 1;
+    width: 100vh;
+  }
+
+
+  //ICON
+
+  &__icon {
+    position: relative;
+    //so that the lines are in the center of the button
+    margin-top: 3.5rem;
+
+    //we are creating a before and after and the actual element to all be little lines
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-grey-dark-3;
+      display: inline-block;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all .2s;
+    }
+
+    // !! why does these elements get fatter? also hover is weird
+    &::before { 
+      top: -1rem;
+      //for demonstration purposes:
+      //if this isn't set, it will transform from the center as the origin of the movement (in this case it's a rotation, so it will rotate around the center, or around the left axis)
+      // transform-origin: left;
+    }
+    &::after { top: 1rem; }
+  }
+
+  //when the button is hovered, do this to the icon before element
+  &__button:hover &__icon::before {
+    top: -1.2rem;
+  }
+
+  &__button:hover &__icon::after {
+    top: 1.2rem;
+  }
+
+  //when the checkbox is selected, grab it's sibling then the sibling's child
+  &__checkbox:checked + &__button &__icon {
+    //we don't want to remove the width and height of the element, because the before and after are positioned relative to that size. so instead we just make it transparent
+    background-color: transparent;
+  }
+
+  &__checkbox:checked + &__button &__icon::before {
+    top: 0;
+    //extra rotation (instead of 45deg) so that it looks cooler
+    transform: rotate(135deg)
+  }
+
+  &__checkbox:checked + &__button &__icon::after {
+    top: 0;
+    transform: rotate(-135deg)
+  }
+
+}
