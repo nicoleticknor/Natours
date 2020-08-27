@@ -1,0 +1,120 @@
+.form {
+
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+  
+  &__input {
+    font-size: 1.5rem;
+    //for some weird reason, browsers don't pass fonts down to form styling. So force it to inherit it
+    font-family: inherit;
+    color: inherit;
+    //give a bit more padding on the sides for form elements otherwise it'll look weird
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba($color-white, .5);
+    border: none;
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all .3s;
+
+    &:focus {
+      //browser gives a focus outline to the form element that the user is interacting with. Replace it this way
+      //note: for accessibility never just remove it
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, .1);
+      border-bottom: 3px solid $color-primary;
+    }
+
+    //when the form input is invalid, apply this style
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: .7rem;
+    //remember - this allows you to apply block element properties to non-block elements (inline elements?)
+    display: block;
+    transition: all .3s;
+  }
+
+  //applying a style to the label element when a placeholder is visible in the related input element
+  //these are both children of the same parent. use the sibling selector. + is adjacent sibling (beside it in markup), ~ is any sibling
+  //note that the label element has to be after the input element if it is to be able to be accessed by the sibling selector (guessing because of cascading)
+  &__input:placeholder-shown + &__label {
+    //remember, this applies styles to the label element based on a condition of the input element
+    opacity: 0;
+    //we can't animate visibility, so we also use opacity so that we can animate it later
+    visibility: hidden;
+    //this selector specifies the starting point for this element. we start this -4 up so that it looks like it flies down once the placeholder isn't shown anymore
+    transform: translateY(-4rem);
+  }
+
+  &__radio-group {
+    //the idea is that these 2 will position them side by side
+    width: 49%;
+    display: inline-block;
+
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    //the cursor makes them look like normal radio buttons have
+    cursor: pointer;
+    position: relative;
+    //give enough space between radio button and text for the styling
+    padding: 1rem;
+  }
+
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 3px solid $color-primary;
+    border-radius: 50%;
+    //this will only work if it's a block or inline block element
+    display: inline-block;
+    position: absolute;
+    left: -2.3rem;
+    top: 4px;
+
+    //so that we don't have to actually create an element for this
+    &::after {
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      //to make it a circle
+      border-radius: 50%;
+
+      //to center it
+      //the parent is the radio-button. it's okay that it's not position relative; position just needs to be specified
+      position: absolute;
+      top: 24%;
+      left: 24%;
+      transform: translateY(-50%, -50%);
+      background-color: $color-primary;
+      //by default, the green circle is deselected
+      opacity: 0;
+      transition: opacity .2s;
+    }
+  }
+
+  // when the radio input field is checked, then use the sibling selector to grab the radio button to style it
+  // but instead of grabbing the radio button itself, you grab it's after pseudoelement
+  &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    opacity: 1;
+  }
+}

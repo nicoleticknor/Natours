@@ -1,0 +1,91 @@
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, .1);
+  //have to set the bg color with rgba 60% opacity rather than the opacity property, because otherwise everything inside the element would inherit that opacity
+  background-color: rgba($color-white, .6);
+  border-radius: 3px;
+  padding: 6rem;
+  //adding an additional 3rem of padding to the left to make up for the translate -3rem to the shape element
+  padding-left: 9rem;
+  font-size: $default-font-size;
+  //skew the parent
+  transform: skewX(-12deg);
+  //but you can't have two transform properties at the same time, and the image already has translate on it
+  //so we can't use the direct child unskew fix as before (below). We have to do them manually to each child
+  // & > * {
+  //   transform: skewX(12deg);
+  // }
+
+  &__shape {
+    //height, width, and float are essential to the shape-outside property. otherwise it won't work
+    width: 15rem;
+    height: 15rem;
+    //float left will make the rest of the content float around it while it's positioned to the left
+    float: left;
+    //this will make the shape element into a circle, regardless of what shape the image is
+    //circle(radius at position of center of circle, 
+    //this radius is half the height and the width of the element (so the diameter will fill it)
+    //this center is 50% 50% which is dead center
+    //may not need webkit anymore
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(50% at 50% 50%);
+
+    //put a circle there so we don't have to imagine one
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+
+    //the best way to move a floated element is to use a transform translate
+    //skew goes here too
+    transform: translateX(-3rem) skewX(12deg);
+
+    //because it's the parent of the caption
+    position: relative;
+  }
+
+  &__img {
+    //you always need to give an image either a width or a height for responsiveness.
+    //he usually uses width, but because this is a landscape photo, use height so that it's not too short
+    height: 100%;
+    //to center the image in the circle. also because we want it to zoom out on hover
+    transform: translateX(-4rem) scale(1.4);
+    backface-visibility: hidden;
+    transition: all .5s;
+  }
+
+  &__text {
+    transform: skewX(12deg);
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    //starts out further down so the animation on hover is pretty
+    transform: translate(-50%, 20%);
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    //so that it's invisible before hover
+    opacity: 0;
+    transition: all .5s;
+    //to fix the shaking in the text in the animation.
+    //in general, when something weird happens with a transform, just try putting backface-visibility: hidden on its parent
+    backface-visibility: hidden;
+  }
+
+  //as soon as the story is hovered, we want to change the caption.
+  //i dont really understand this selector
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  //changes the image on hover on the story
+  &:hover &__img {
+    transform: translateX(-4rem) scale(1);
+    // to blur and darken the image. there are lots of other types of filters to play with
+    filter: blur(3px) brightness(80%);
+  }
+}

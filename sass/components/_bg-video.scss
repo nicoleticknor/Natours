@@ -1,0 +1,23 @@
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  //because we need it behind everything
+  z-index: -1;
+  opacity: .15;
+  //use this whenever a child thing overflows the parent container
+  overflow: hidden;
+
+  &__content {
+    //to make sure the video isn't bigger than the container
+    height: 100%;
+    width: 100%;
+    //to stretch the video so that it fills the parent, but maintaining the same aspect ratio (cover does that)
+    //it will clip off whatever doesn't fit in the container
+    //other types of fit do other things
+    //you can use this with elements and with images/videos
+    object-fit: cover;
+  }
+}

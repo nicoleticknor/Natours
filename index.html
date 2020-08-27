@@ -230,8 +230,123 @@
           <a href="#" class="btn btn--green">Discover all tours</a>
         </div>
 
-
       </section>
+
+      <section class="section-stories">
+        <div class="bg-video">
+          <!-- video element is a special element. we aren't using the src tag like with photos, but rather the source tag
+          autoplay is acceptable since it's muted -->
+          <video class="bg-video__content" autoplay muted loop>
+            <!-- got these videos from coverr.co (like unsplash)-->
+            <!-- using two video types for compatibility with browsers -->
+            <source src="img/video.mp4" type="video/mp4">
+            <source src="img/video.webm" type="video/webm">
+            <!-- If the browser doesn't support videos like IE8, then this text will show up instead of the video -->
+            Your browser is not supported!
+          </video>
+        </div>
+        <div class="u-center-text u-margin-bottom-big">
+          <h2 class="heading-secondary">
+            We make people genuinely happy
+          </h2>
+        </div>
+
+        <div class="row">
+          <div class="story">
+            <!-- this is a figure because it's an image with a caption. figcaption is a special element for captions -->
+            <figure class="story__shape">
+              <img src="img/nat-8.jpg" alt="Person on a tour" class="story__img">
+              <figcaption class="story__caption">Mary Smith</figcaption>
+            </figure>
+            <div class="story__text">
+              <h3 class="heading-tertiary u-margin-bottom-small">I had the best week ever with my family</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto laudantium accusantium accusamus a deserunt dolor sit dicta minima unde neque ipsum at dolorem magni excepturi, labore molestias fugiat quidem eum!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="story">
+            <!-- this is a figure because it's an image with a caption. figcaption is a special element for captions -->
+            <figure class="story__shape">
+              <img src="img/nat-9.jpg" alt="Person on a tour" class="story__img">
+              <figcaption class="story__caption">Jack Wilson</figcaption>
+            </figure>
+            <div class="story__text">
+              <h3 class="heading-tertiary u-margin-bottom-small">WOW! My life is completely different now</h3>
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut placeat asperiores, fugiat molestias veritatis explicabo sequi porro corporis dicta quos excepturi reiciendis impedit facilis similique! Ducimus ex quia voluptates. Suscipit!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="u-center-text u-margin-top-huge">
+          <a href="#" class="btn btn-text">Read all stories &rarr;</a>
+        </div>
+      </section>
+
+      <section class="section-book">
+        <div class="row">
+          <div class="book">
+            <div class="book__form">
+              <form action="#" class="form">
+
+                <div class="u-margin-bottom-medium">
+                  <h2 class="heading-secondary">
+                    Start booking now
+                  </h2>
+                </div>
+
+                <div class="form__group">
+                  <input type="text" class="form__input" placeholder="Full name" id="name" required>
+                  <label for="name" class="form__label">Full name</label>
+                </div>
+
+                <div class="form__group">
+                  <input type="email" class="form__input" placeholder="Email address" id="email" required>
+                  <label for="email" class="form__label">Email address</label>
+                </div>
+
+                <div class="form__group">
+                  <div class="form__radio-group">
+                    <!-- need to specify a name attribute so that these two radio buttons are grouped together (makes them limit to one active) -->
+                    <input type="radio" class="form__radio-input" id="small" name="size">
+                    <label for="small" class="form__radio-label">
+                      Small tour group
+                      <span class="form__radio-button"></span>
+                    </label>
+                    <!-- since there's no way to style a radio button in CSS, we have to add this so that we can style it, and hide the original input and label -->
+
+                  </div>
+
+                  <div class="form__radio-group">
+                    <input type="radio" class="form__radio-input" id="large" name="size">
+                    <label for="large" class="form__radio-label">
+                      Large tour group
+                      <span class="form__radio-button"></span>
+                    </label>
+
+                  </div>
+                </div>
+
+                <div class="form__group">
+                  <!-- A form requires a button, not an anchor link -->
+                  <button class="btn btn--green">Next step &rarr;</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+
     </main>
 
 

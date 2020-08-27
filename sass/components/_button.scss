@@ -1,6 +1,9 @@
 .btn {
-  /*link / visited is a state that the btn can have*/
-  &:link, &:visited {
+  //doing this for the <button> element
+  &,
+    /*link / visited is a state that the btn can have*/
+  &:link, 
+  &:visited {
     text-transform: uppercase;
     text-decoration: none;
     padding: 1.5rem 4rem;
@@ -9,6 +12,11 @@
     transition: all .2s;
     /*this is the parent of the after element so it's position relative*/
     position: relative;
+
+    //this won't work without the &,
+    //Change for the <button> element
+    border: none;
+    cursor: pointer;
   }
   &:hover {
     transform: translateY(-0.3rem);
@@ -22,8 +30,12 @@
     }
   }
 
-  &:active {
-    transform: translateY(-.1rem);
+  &:active,
+  //this allows accessibility for the focus on the <button> element.
+  // don't just remove the focus because that's bad for accesibility. Instead, style it the same as the active state
+  &:focus {
+    outline: none;
+    transform: translateY(1px);
     box-shadow: 0 .5rem 1rem rgba($color-black,.2);
   }
 
