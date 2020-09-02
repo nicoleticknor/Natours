@@ -697,7 +697,8 @@ body {
   text-transform: uppercase;
   background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
   background-size: 225%;
-  transition: all .4s; }
+  transition: all .4s;
+  visibility: hidden; }
   .navigation__link:link span, .navigation__link:visited span {
     margin-right: 1.5rem;
     display: inline-block; }
@@ -705,7 +706,8 @@ body {
 .navigation__link:hover, .navigation__link:active {
   background-position: 100%;
   color: #7ed56f;
-  transform: translateX(1rem); }
+  transform: translateX(1rem);
+  visibility: visible; }
 
 .navigation__checkbox:checked ~ .navigation__background {
   transform: scale(80); }

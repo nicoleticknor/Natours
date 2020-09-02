@@ -60,11 +60,7 @@
   }
 
   &__list {
-    //refactor this into a mixin and then put it wherever we use it
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    @include absCenter;
     list-style: none;
     text-align: center;
     //this is because it grows in the animation and we don't want that
@@ -92,6 +88,7 @@
       //needs to be higher because of the 120deg gradient
       background-size: 225%;
       transition: all .4s;
+      visibility: hidden;
 
       span {
         margin-right: 1.5rem;
@@ -104,6 +101,7 @@
       background-position: 100%; 
       color: $color-primary;
       transform: translateX(1rem);
+      visibility: visible;
     }
 
   }
