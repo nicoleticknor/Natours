@@ -43,7 +43,7 @@
           <span class="heading-primary--main">Outdoors</span>
           <span class="heading-primary--sub">is where life happens</span>
         </h1>
-        <a href="#" class="btn btn--white btn--animated">Discover our tours</a>
+        <a href="#section-tours" class="btn btn--white btn--animated">Discover our tours</a>
       </div>
     </header>
 
@@ -127,7 +127,7 @@
         </div>
       </section>
 
-      <section class="section-tours">
+      <section class="section-tours" id="section-tours">
         <div class="u-center-text u-margin-bottom-big">
           <h2 class="heading-secondary">
             Most popular tours
@@ -142,7 +142,7 @@
                 also since we have 3 cards, we need a modifier for each one card__picture--1 etc-->
                 <div class="card__picture card__picture--1">
                   <!-- this is just a space. the image will be applied via CSS rather than markup, so we need the space so that we can see the element -->
-                  &nbsp;
+                  <!-- &nbsp; -->
                 </div>
                 <h4 class="card__heading">
                   <span class="card__heading-span card__heading-span--1">
@@ -166,7 +166,7 @@
                     <p class="card__price-only">Only</p>
                     <p class="card__price-value">$297</p>
                   </div>
-                  <a href="#" class="btn btn--white">Book now!</a>
+                  <a href="#popup" class="btn btn--white">Book now!</a>
                 </div>
               </div>
             </div>
@@ -202,7 +202,7 @@
                     <p class="card__price-only">Only</p>
                     <p class="card__price-value">$497</p>
                   </div>
-                  <a href="#" class="btn btn--white">Book now!</a>
+                  <a href="#popup" class="btn btn--white">Book now!</a>
                 </div>
               </div>
             </div>
@@ -238,7 +238,7 @@
                     <p class="card__price-only">Only</p>
                     <p class="card__price-value">$897</p>
                   </div>
-                  <a href="#" class="btn btn--white">Book now!</a>
+                  <a href="#popup" class="btn btn--white">Book now!</a>
                 </div>
               </div>
             </div>
@@ -246,7 +246,7 @@
         </div>
 
         <div class="u-center-text u-margin-top-huge">
-          <a href="#" class="btn btn--green">Discover all tours</a>
+          <a href="#section-tours" class="btn btn--green">Discover all tours</a>
         </div>
 
       </section>
@@ -385,6 +385,25 @@
         </div>
       </div>
     </footer>
+
+    <!-- we could put this wherever we want in the markup -->
+    <div class="popup" id="popup">
+      <div class="popup__content">
+        <div class="popup__left">
+          <img src="img/nat-8.jpg" alt="Tour photo" class="popup__img">
+          <img src="img/nat-9.jpg" alt="Tour photo" class="popup__img">
+        </div>
+        <div class="popup__right">
+          <a href="#section-tours" class="popup__close">&times;</a>
+          <h2 class="heading-secondary u-margin-bottom-small">Start booking now</h2>
+          <h3 class="heading-tertiary u-margin-bottom-small">Important &ndash; Please read these terms before booking</h3>
+          <p class="popup__text">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam earum, quisquam inventore eius beatae in facilis voluptatem quas, iste natus laudantium ab atque provident quaerat repellat vero optio a hic! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus reprehenderit velit beatae? Nemo provident culpa saepe, nihil porro harum ut mollitia, consectetur voluptatem tempore, in deserunt magnam velit eius ducimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem at ipsam quibusdam molestias perferendis error eaque animi et alias quis blanditiis nostrum exercitationem dolorum iure nesciunt, placeat culpa quos beatae.
+          </p>
+          <a href="#" class="btn btn--green">Book now</a>
+        </div>
+      </div>
+    </div>
 
 
     <!-- example section to learn grid layout with float -->
